@@ -9,7 +9,15 @@ class CheckBedObstruction:
     def __init__(self, config):
         self.register_class_vars(config)
 
-        # Prompt override in case user wants to tweak the performance.
+        # Build the prompt for the AI
+        reference_text = ""
+        if self.reference_images:
+            reference_text = (
+                f"The first {len(self.camera_snapshot_urls)} image(s) are the current live images of the bed. "
+                f"The last {len(self.reference_images)} image(s) depict examples of the bed when clear. Please take "
+                f"the clear images into consideration when making your determination."
+            )
+
         self.prompt = f'''
             System Prompt: You are an expert 3D printing quality control engineer.
             Your sole task is to determine if the 3D printer bed is clear for a new print.
@@ -17,10 +25,7 @@ class CheckBedObstruction:
             tools, or debris left on the print surface. If you do not see the bed in one image,
             only consider any images where the bed is visible, instead.{self.prompt_extension}
 
-            {(f"The first {len(self.camera_snapshot_urls)} image(s) are the current live images of the bed."
-              f"The last {len(self.reference_images)} image(s) depict examples of the bed when clear. Please take"
-              f"the clear images into consideration when making your determination.")
-            if len(self.reference_images) else ""}
+            {reference_text}
 
             User Prompt: Analyze the provided image of the 3D printer bed.
             Follow these steps: Identify the print bed surface. Search for any objects,
@@ -32,6 +37,8 @@ class CheckBedObstruction:
             If the bed is not clear, provide a detailed reason in the 'reason' key with location and shape of the
             object. 
             '''
+
+        self.printer.add_object('CheckBedObstruction', self)
 
         self.printer.add_object('CheckBedObstruction', self)
         
