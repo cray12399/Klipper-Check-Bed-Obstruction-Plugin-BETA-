@@ -172,8 +172,11 @@ class CheckBedObstruction:
 
             # Evaluate response
             if self.bed_clear == 0:
-                reason = f"Reason: {res['reason']}"
-                raise gcmd.error(f"Bed obstructed by object! {reason if self.provide_reason else ''}")
+                if (self.provide_reason):
+                    reason = f"Reason: {res['reason']}"
+                    raise gcmd.error(f"Bed obstructed by object! " + reason)
+                else:
+                    raise gcmd.error(f"Bed obstructed by object! ")
             else:
                 gcmd.respond_info("Bed is clear.")
 
