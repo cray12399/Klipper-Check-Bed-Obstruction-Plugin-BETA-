@@ -39,8 +39,6 @@ class CheckBedObstruction:
             '''
 
         self.printer.add_object('CheckBedObstruction', self)
-
-        self.printer.add_object('CheckBedObstruction', self)
         
         self.register_commands()
     
