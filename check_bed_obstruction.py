@@ -180,13 +180,16 @@ class CheckBedObstruction:
                 if (self.provide_reason):
                     reason = f"Reason: {res['reason']}"
                     raise gcmd.error(f"Bed obstructed by object! " + reason)
+                    return
                 else:
                     raise gcmd.error(f"Bed obstructed by object! ")
+                    return
             else:
                 gcmd.respond_info("Bed is clear.")
 
         except Exception as e:
             raise gcmd.error(f"CHECK_BED_OBSTRUCTION Error: {e}")
+            return
 
     def cmd_TAKE_REFERENCE_IMAGES(self, gcmd):
         '''
@@ -223,6 +226,7 @@ class CheckBedObstruction:
             gcmd.respond_info(f"Done downloading images!")
         except Exception as e:
             gcmd.error(f"Failed to download bed images. {e}")
+            return
 
 
 # --------------------- STATIC FUNCTIONS --------------------- 
