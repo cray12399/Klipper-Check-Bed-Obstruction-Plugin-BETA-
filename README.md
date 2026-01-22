@@ -38,6 +38,8 @@ camera_snapshot_urls:
 ```
 
 # Usage
+
+**Primary Usage: **
 Add `CHECK_BED_OBSTRUCTION` gcode to whatever macro in which you need the bed to be checked for obstructions. 
 
 To override homing, for example:
@@ -55,4 +57,5 @@ gcode:
   {% endif %}
 ```
 
+**Providing Reference Images to the AI: **
 You can also optionally provide reference images for a clear bed to the AI. To do so, take clear empty bed reference images using the command `TAKE_REFERENCE_IMAGES`. Running the command on your printer will save snapshots from `camera_snapshot_urls` in `printer.cfg` to `~/printer_data/config/bed_images/`
