@@ -76,6 +76,12 @@ class CheckBedObstruction:
             ''
         )
 
+        # Whether the AI should provide a reason when denying.
+        self.provide_reason = config.getboolean(
+            'provide_reason',
+            False
+        )
+
         # List of clear reference images.
         self.reference_images = [f"{IMAGE_PATH}{i}" for i in os.listdir(IMAGE_PATH)]
 
@@ -166,7 +172,8 @@ class CheckBedObstruction:
 
             # Evaluate response
             if self.bed_clear == 0:
-                raise gcmd.error(f"Bed obstructed by object! Reason: {res['reason']}")
+                reason = f"Reason: {res['reason']}"
+                raise gcmd.error(f"Bed obstructed by object! {reason if self.provide_reason else ""}")
             else:
                 gcmd.respond_info("Bed is clear.")
 
