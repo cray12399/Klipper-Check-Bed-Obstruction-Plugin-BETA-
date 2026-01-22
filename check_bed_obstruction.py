@@ -9,7 +9,7 @@ class CheckBedObstruction:
     def __init__(self, config):
         self.register_class_vars(config)
 
-        # Build the prompt for the AI
+        # Build the prompt for the AI.
         reference_text = ""
         if self.reference_images:
             reference_text = (
