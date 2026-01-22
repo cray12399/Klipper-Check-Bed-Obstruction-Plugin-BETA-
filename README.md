@@ -54,3 +54,5 @@ gcode:
     G28.1
   {% endif %}
 ```
+
+You can also optionally provide reference images for a clear bed to the AI. To do so, take clear empty bed reference images using the command `TAKE_REFERENCE_IMAGES`. Running the command on your printer will save snapshots from `camera_snapshot_urls` in `printer.cfg` to `~/printer_data/config/bed_images/`
