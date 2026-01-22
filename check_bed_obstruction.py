@@ -114,7 +114,7 @@ class CheckBedObstruction:
 
         # Register the take clear image command
         self.gcode.register_command(
-            'TAKE_CLEAR_OBSTRUCTION_IMAGES',
+            'TAKE_REFERENCE_IMAGES',
             self.cmd_TAKE_REFERENCE_IMAGES,
             "Takes a picture of the bed when it is clear of obstructions for the AI."
         )
